@@ -48,12 +48,25 @@ const server = http.createServer(async (res, req) => {
 		Todos.write(data);
 		res.writeHead(501);
 		res.end(JSON.stringify({ success: true }));
+	} else if (req.metohod === 'PUT') {
+		req.body = await parser(req);
+		const todos = await Todos.read();
+		const id = (todos[todos.length - 1]?.id || 0) + 1;
+
+		const { isComplated } = req.body;
+		const newData = data.filter((e) => e.id === id);
+
+		isComplated = true
+
+		const data = todos.length ? [...todos, newData] : [newData];
+
+		Todos.write(data);
+		res.writeHead(200, "isComplated");
 	}
 });
 PORT = 5487;
 server.listen(PORT, () => {
 	console.log(`server run ${PORT}`);
 });
-
 
 // "uzurli sabablarga ko'ra ayrim muammolar yuzaga kelgan iltimos logikasiga ham ahamiyat bering"

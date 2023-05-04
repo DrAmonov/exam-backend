@@ -54,3 +54,6 @@ PORT = 5487;
 server.listen(PORT, () => {
 	console.log(`server run ${PORT}`);
 });
+
+
+// "uzurli sabablarga ko'ra ayrim muammolar yuzaga kelgan iltimos logikasiga ham ahamiyat bering"
